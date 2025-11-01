@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.12.1 on win32)" generated="2025-10-14T19:30:58.101872" rpa="false" schemaversion="5">
+<suite id="s1" name="Eco Tochi" source="C:\Users\Michelle\Documents\eco-tochi-tests\e2e\robot\eco_tochi.robot">
+<kw name="Conectar" owner="eco_tochi" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-10-14T19:30:58.213324" level="INFO">Creating Session using : alias=esp, url=http://192.168.1.9, headers={},                     cookies={}, auth=None, timeout=5, proxies=None, verify=False,                     debug=0 </msg>
+<arg>esp</arg>
+<arg>${BASE_URL}</arg>
+<arg>timeout=${TIMEOUT_S}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-10-14T19:30:58.213324" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-10-14T19:30:58.213324" elapsed="0.000000"/>
+</kw>
+<test id="s1-t1" name="Root lista endpoints esperados" line="8">
+<kw name="Validar Root" owner="eco_tochi">
+<kw name="GET JSON" owner="eco_tochi">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-10-14T19:30:58.356957" level="INFO">GET Request : url=http://192.168.1.9/ 
+ path_url=/ 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-14T19:30:58.356957" level="INFO">GET Response : url=http://192.168.1.9/ 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'Content-Length': '112', 'Connection': 'close'} 
+ body={"ok":true,"endpoints":["/temperature","/humidity","/on","/off"],"note":"Respuestas de testing en formato JSON"} 
+ </msg>
+<msg time="2025-10-14T19:30:58.356957" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>esp</arg>
+<arg>${path}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.229220" elapsed="0.127737"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-10-14T19:30:58.356957" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.356957" elapsed="0.010334"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-14T19:30:58.367291" level="INFO">${json} = {'ok': True, 'endpoints': ['/temperature', '/humidity', '/on', '/off'], 'note': 'Respuestas de testing en formato JSON'}</msg>
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.367291" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${json}</value>
+<status status="PASS" start="2025-10-14T19:30:58.367291" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-14T19:30:58.367291" level="INFO">${json} = {'ok': True, 'endpoints': ['/temperature', '/humidity', '/on', '/off'], 'note': 'Respuestas de testing en formato JSON'}</msg>
+<var>${json}</var>
+<arg>/</arg>
+<status status="PASS" start="2025-10-14T19:30:58.229220" elapsed="0.138071"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${json["ok"]}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.367291" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-14T19:30:58.367291" level="INFO">${eps} = ['/temperature', '/humidity', '/on', '/off']</msg>
+<var>${eps}</var>
+<arg>${json["endpoints"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.367291" elapsed="0.000000"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${eps}</arg>
+<arg>/temperature</arg>
+<doc>Fails if the ``value`` is not found from ``list``.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.367291" elapsed="0.000000"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${eps}</arg>
+<arg>/humidity</arg>
+<doc>Fails if the ``value`` is not found from ``list``.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.367291" elapsed="0.000000"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${eps}</arg>
+<arg>/on</arg>
+<doc>Fails if the ``value`` is not found from ``list``.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.367291" elapsed="0.000000"/>
+</kw>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${eps}</arg>
+<arg>/off</arg>
+<doc>Fails if the ``value`` is not found from ``list``.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.367291" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-10-14T19:30:58.229220" elapsed="0.138071"/>
+</kw>
+<status status="PASS" start="2025-10-14T19:30:58.213324" elapsed="0.153967"/>
+</test>
+<test id="s1-t2" name="ON pone el dispositivo en true" line="11">
+<kw name="Encender Y Validar" owner="eco_tochi">
+<kw name="GET JSON" owner="eco_tochi">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-10-14T19:30:58.388968" level="INFO">GET Request : url=http://192.168.1.9/on 
+ path_url=/on 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-14T19:30:58.388968" level="INFO">GET Response : url=http://192.168.1.9/on 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'Content-Length': '89', 'Connection': 'close'} 
+ body={"ok":true,"endpoint":"on","data":{"message":"testing on","device_on":true},"ts":4231198} 
+ </msg>
+<msg time="2025-10-14T19:30:58.388968" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>esp</arg>
+<arg>${path}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.367291" elapsed="0.021677"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-10-14T19:30:58.388968" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.388968" elapsed="0.016093"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-14T19:30:58.405061" level="INFO">${json} = {'ok': True, 'endpoint': 'on', 'data': {'message': 'testing on', 'device_on': True}, 'ts': 4231198}</msg>
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.405061" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${json}</value>
+<status status="PASS" start="2025-10-14T19:30:58.405061" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-14T19:30:58.405061" level="INFO">${json} = {'ok': True, 'endpoint': 'on', 'data': {'message': 'testing on', 'device_on': True}, 'ts': 4231198}</msg>
+<var>${json}</var>
+<arg>/on</arg>
+<status status="PASS" start="2025-10-14T19:30:58.367291" elapsed="0.037770"/>
+</kw>
+<kw name="Debe Responder OK Con Endpoint" owner="eco_tochi">
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${json["ok"]}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.405061" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${json["endpoint"]}</arg>
+<arg>${endpoint}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.405061" elapsed="0.000000"/>
+</kw>
+<arg>${json}</arg>
+<arg>on</arg>
+<status status="PASS" start="2025-10-14T19:30:58.405061" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${json["data"]["device_on"]}</arg>
+<arg>${True}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.405061" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-10-14T19:30:58.367291" elapsed="0.037770"/>
+</kw>
+<status status="PASS" start="2025-10-14T19:30:58.367291" elapsed="0.037770"/>
+</test>
+<test id="s1-t3" name="OFF pone el dispositivo en false" line="14">
+<kw name="Apagar Y Validar" owner="eco_tochi">
+<kw name="GET JSON" owner="eco_tochi">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-10-14T19:30:58.421047" level="INFO">GET Request : url=http://192.168.1.9/off 
+ path_url=/off 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-14T19:30:58.421047" level="INFO">GET Response : url=http://192.168.1.9/off 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'Content-Length': '92', 'Connection': 'close'} 
+ body={"ok":true,"endpoint":"off","data":{"message":"testing off","device_on":false},"ts":4231231} 
+ </msg>
+<msg time="2025-10-14T19:30:58.421047" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>esp</arg>
+<arg>${path}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.405061" elapsed="0.015986"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-10-14T19:30:58.421047" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.421047" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-14T19:30:58.421047" level="INFO">${json} = {'ok': True, 'endpoint': 'off', 'data': {'message': 'testing off', 'device_on': False}, 'ts': 4231231}</msg>
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.421047" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${json}</value>
+<status status="PASS" start="2025-10-14T19:30:58.421047" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-14T19:30:58.421047" level="INFO">${json} = {'ok': True, 'endpoint': 'off', 'data': {'message': 'testing off', 'device_on': False}, 'ts': 4231231}</msg>
+<var>${json}</var>
+<arg>/off</arg>
+<status status="PASS" start="2025-10-14T19:30:58.405061" elapsed="0.015986"/>
+</kw>
+<kw name="Debe Responder OK Con Endpoint" owner="eco_tochi">
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${json["ok"]}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.421047" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${json["endpoint"]}</arg>
+<arg>${endpoint}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.421047" elapsed="0.000000"/>
+</kw>
+<arg>${json}</arg>
+<arg>off</arg>
+<status status="PASS" start="2025-10-14T19:30:58.421047" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${json["data"]["device_on"]}</arg>
+<arg>${False}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.421047" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-10-14T19:30:58.405061" elapsed="0.015986"/>
+</kw>
+<status status="PASS" start="2025-10-14T19:30:58.405061" elapsed="0.015986"/>
+</test>
+<test id="s1-t4" name="Temperature y Humidity responden JSON válido" line="17">
+<kw name="Validar Temperatura" owner="eco_tochi">
+<kw name="GET JSON" owner="eco_tochi">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-10-14T19:30:58.452896" level="INFO">GET Request : url=http://192.168.1.9/temperature 
+ path_url=/temperature 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-14T19:30:58.452896" level="INFO">GET Response : url=http://192.168.1.9/temperature 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'Content-Length': '116', 'Connection': 'close'} 
+ body={"ok":true,"endpoint":"temperature","data":{"message":"testing temperature","value":null,"units":null},"ts":4231260} 
+ </msg>
+<msg time="2025-10-14T19:30:58.452896" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>esp</arg>
+<arg>${path}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.436794" elapsed="0.016102"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-10-14T19:30:58.452896" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.452896" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-14T19:30:58.452896" level="INFO">${json} = {'ok': True, 'endpoint': 'temperature', 'data': {'message': 'testing temperature', 'value': None, 'units': None}, 'ts': 4231260}</msg>
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.452896" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${json}</value>
+<status status="PASS" start="2025-10-14T19:30:58.452896" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-14T19:30:58.452896" level="INFO">${json} = {'ok': True, 'endpoint': 'temperature', 'data': {'message': 'testing temperature', 'value': None, 'units': None}, 'ts': 4231260}</msg>
+<var>${json}</var>
+<arg>/temperature</arg>
+<status status="PASS" start="2025-10-14T19:30:58.436794" elapsed="0.016102"/>
+</kw>
+<kw name="Debe Responder OK Con Endpoint" owner="eco_tochi">
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${json["ok"]}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.452896" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${json["endpoint"]}</arg>
+<arg>${endpoint}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.452896" elapsed="0.000000"/>
+</kw>
+<arg>${json}</arg>
+<arg>temperature</arg>
+<status status="PASS" start="2025-10-14T19:30:58.452896" elapsed="0.000000"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json["data"]}</arg>
+<arg>message</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.452896" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-10-14T19:30:58.436794" elapsed="0.016102"/>
+</kw>
+<kw name="Validar Humedad" owner="eco_tochi">
+<kw name="GET JSON" owner="eco_tochi">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-10-14T19:30:58.485173" level="INFO">GET Request : url=http://192.168.1.9/humidity 
+ path_url=/humidity 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-14T19:30:58.485173" level="INFO">GET Response : url=http://192.168.1.9/humidity 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'Content-Length': '110', 'Connection': 'close'} 
+ body={"ok":true,"endpoint":"humidity","data":{"message":"testing humidity","value":null,"units":null},"ts":4231293} 
+ </msg>
+<msg time="2025-10-14T19:30:58.485173" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>esp</arg>
+<arg>${path}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.452896" elapsed="0.032277"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-10-14T19:30:58.485173" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.485173" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-14T19:30:58.485173" level="INFO">${json} = {'ok': True, 'endpoint': 'humidity', 'data': {'message': 'testing humidity', 'value': None, 'units': None}, 'ts': 4231293}</msg>
+<var>${json}</var>
+<arg>${resp.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.485173" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${json}</value>
+<status status="PASS" start="2025-10-14T19:30:58.485173" elapsed="0.000000"/>
+</return>
+<msg time="2025-10-14T19:30:58.485173" level="INFO">${json} = {'ok': True, 'endpoint': 'humidity', 'data': {'message': 'testing humidity', 'value': None, 'units': None}, 'ts': 4231293}</msg>
+<var>${json}</var>
+<arg>/humidity</arg>
+<status status="PASS" start="2025-10-14T19:30:58.452896" elapsed="0.032277"/>
+</kw>
+<kw name="Debe Responder OK Con Endpoint" owner="eco_tochi">
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${json["ok"]}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.501082" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${json["endpoint"]}</arg>
+<arg>${endpoint}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.501082" elapsed="0.000000"/>
+</kw>
+<arg>${json}</arg>
+<arg>humidity</arg>
+<status status="PASS" start="2025-10-14T19:30:58.485173" elapsed="0.015909"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json["data"]}</arg>
+<arg>message</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.501082" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-10-14T19:30:58.452896" elapsed="0.048186"/>
+</kw>
+<status status="PASS" start="2025-10-14T19:30:58.421047" elapsed="0.080035"/>
+</test>
+<test id="s1-t5" name="Ruta inexistente devuelve 404 (negativo)" line="21">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-10-14T19:30:58.517250" level="INFO">GET Request : url=http://192.168.1.9/no-existe 
+ path_url=/no-existe 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-14T19:30:58.517250" level="INFO">GET Response : url=http://192.168.1.9/no-existe 
+ status=404, reason=Not Found 
+ headers={'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'Content-Length': '52', 'Connection': 'close'} 
+ body={"ok":false,"error":"Not Found","path":"/no-existe"} 
+ </msg>
+<msg time="2025-10-14T19:30:58.517250" level="INFO">${resp} = &lt;Response [404]&gt;</msg>
+<var>${resp}</var>
+<arg>esp</arg>
+<arg>/no-existe</arg>
+<arg>expected_status=404</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.501082" elapsed="0.016168"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-10-14T19:30:58.517250" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>404</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.517250" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-10-14T19:30:58.501082" elapsed="0.016168"/>
+</test>
+<kw name="Cerrar" owner="eco_tochi" type="TEARDOWN">
+<kw name="Delete All Sessions" owner="RequestsLibrary">
+<msg time="2025-10-14T19:30:58.517250" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2025-10-14T19:30:58.517250" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-10-14T19:30:58.517250" elapsed="0.000000"/>
+</kw>
+<doc>Suite E2E Eco-Tochi (Wi-Fi HTTP): valida endpoints JSON del ESP32.</doc>
+<status status="PASS" start="2025-10-14T19:30:58.101872" elapsed="0.415378"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Eco Tochi" id="s1" pass="5" fail="0" skip="0">Eco Tochi</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

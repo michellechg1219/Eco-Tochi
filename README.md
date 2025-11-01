@@ -16,18 +16,33 @@ eco-tochi/
 │  │  ├─ wifi_ip_ok.png
 │  │  ├─ curl_temperature_ok.png
 │  │  └─ android_project_created.png
-│  └─ avance_2025-10-03.md
+│  │  └─ permiso_notificaciones_app.png
+│  │  └─ pantalla_principal_app.png
+│  │  └─ configuracion_app.jpeg
+│  │  └─ historial_alertas_app.jpeg
+│  │  └─ reporte_diagrama_fallos.png
+│  │  └─ diagrama_arbol_fallos.png
+│  ├─ video/
+│  │  └─ video_funcionamiento_app.mp4
 ├─ firmware/
 │  ├─ BlinkSerial/
 │  │  └─ BlinkSerial.ino
 │  └─ HttpJsonServer/
 │     └─ HttpJsonServer.ino
 ├─ android/
-│  └─ EcoTochiApp/         # Proyecto Android (API 25+)
+│  └─ EcoTochiApp/        
 └─ test/
    └─ jmeter/
-      ├─ README-jmeter.md
-      └─ EcoTochi_HTTP_TestPlan.jmx  # (opcional)
+    │  ├─ README-jmeter.md
+    │  └─ EcoTochi_HTTP_TestPlan.jmx 
+   └─ fault-tree-analysis/
+    │  └─ECO-ALERT.zip
+    └─ RobotFramework
+       └─eco-tochi-tests.
+        └─results
+         └─log.html
+         └─results.html
+  
 ```
 
 ---
@@ -103,12 +118,45 @@ curl http://192.168.0.123/off
 
 ---
 
+
 ## 5) Android
 
-- Proyecto **Eco-Tochi** creado en Android Studio (API 25+).
 - *Evidencia:* `docs/screenshots/android_project_created.png`.
 
+### Requisitos
+
+* **Android Studio** (versión compatible con Android Gradle Plugin **8.9.1**).
+* **JDK 17** (se recomienda usar el *Embedded JDK* que incluye Android Studio).
+* **Android SDK** instalado, por ejemplo:
+
+  * `C:\Users\<usuario>\AppData\Local\Android\Sdk`
+  * o una ruta personalizada por ejemplo `E:\ANDROID2`
+* **Gradle wrapper** incluido en el proyecto con versión **8.11.1**.
+
+### Pasos para abrirlo en otra computadora (Windows)
+
+1. Clonar o descomprimir el proyecto en cualquier ruta.
+
+2. Abre **Android Studio → File → Open…** y selecciona:
+
+   `.../eco-tochi/android/EcoTochiApp`
+
+3. Si Android Studio muestra un aviso de que el `sdk.dir` no existe (porque viene de otra máquina), **aceptarlo**: el IDE actualizará el archivo `local.properties` con la ruta de tu SDK local.
+
+4. Ir a **File → Settings → Build, Execution, Deployment → Build Tools → Gradle** y verificar que **Gradle JDK** apunte a un JDK válido (preferentemente el *Embedded JDK* o el que se descargo desde el IDE).
+
+5. Ejecutar **File → Sync Project with Gradle Files** para descargar las dependencias.
+
+### Notas adicionales
+
+* El proyecto Android está en: `android/EcoTochiApp` (no en la raíz).
+* El proyecto usa **Kotlin DSL** (`build.gradle.kts`).
+* Si el Android Studio es más viejo y no soporta AGP **8.9.1**, se puede:
+  * actualizar Android Studio, **o**
+  * bajar la versión de AGP en `build.gradle.kts` o en `gradle/libs.versions.toml`.
+
 ---
+
 
 ## 6) Reproducibilidad (paso a paso)
 
