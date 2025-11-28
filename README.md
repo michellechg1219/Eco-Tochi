@@ -24,13 +24,16 @@ eco-tochi/
 │  │  └─ diagrama_arbol_fallos.png
 │  ├─ video/
 │  │  └─ video_funcionamiento_app.mp4
+│  │  └─ video_sistema_completo_funcional.mp4
 ├─ firmware/
 │  ├─ BlinkSerial/
 │  │  └─ BlinkSerial.ino
 │  └─ HttpJsonServer/
 │     └─ HttpJsonServer.ino
 ├─ android/
-│  └─ EcoTochiApp/        
+│  └─ EcoTochiApp/    
+├─ ESP32/
+│  └─ Eco-Tochi/     
 └─ test/
    └─ jmeter/
     │  ├─ README-jmeter.md
