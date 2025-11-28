@@ -88,8 +88,8 @@ LED: ON / OFF …
 
 Editar las credenciales en el .ino:
 ```cpp
-const char* WIFI_SSID = "Megacable_2.4G_ECAC";
-const char* WIFI_PASS = "Yy7ErPDa";
+const char* WIFI_SSID = "Megacable_2.4G";
+const char* WIFI_PASS = "Yy7Ea";
 ```
 
 **Endpoints**
@@ -104,17 +104,17 @@ const char* WIFI_PASS = "Yy7ErPDa";
 == ESP32 HTTP JSON Test Server ==
 Conectando a WiFi SSID: <SSID>
 ....
-Conectado. IP: 192.168.0.123
+Conectado. IP: 192.168.1.123
 Servidor HTTP iniciado en puerto 80.
 ```
 
 **Pruebas rápidas (se reemplaza IP)**
 ```bash
-curl http://192.168.0.123/
-curl http://192.168.0.123/temperature
-curl http://192.168.0.123/humidity
-curl http://192.168.0.123/on
-curl http://192.168.0.123/off
+curl http://192.168.1.123/
+curl http://192.168.1.123/temperature
+curl http://192.168.1.123/humidity
+curl http://192.168.1.123/on
+curl http://192.168.1.123/off
 ```
 
 *Evidencia:* `docs/screenshots/wifi_ip_ok.png`, `docs/screenshots/curl_temperature_ok.png`.
